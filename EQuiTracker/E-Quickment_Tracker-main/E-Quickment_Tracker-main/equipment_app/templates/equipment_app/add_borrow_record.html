@@ -1,0 +1,46 @@
+{% extends 'equipment_app/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Add Borrow Record</h1>
+</div>
+
+<div class="card" style="max-width: 600px;">
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label class="form-label">Student</label>
+            <select name="student" class="form-control" required>
+                {% for student in students %}
+                <option value="{{ student.id }}">{{ student }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Equipment</label>
+            <select name="equipment" class="form-control" required>
+                {% for item in items %}
+                <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Quantity</label>
+            <input type="number" name="quantity" class="form-control" required min="1">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Expected Return</label>
+            <input type="date" name="expected_return" class="form-control" required>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+            <button type="submit" class="btn btn-primary">Save Borrow Record</button>
+            <a href="/borrow-records/" class="btn" style="background-color: #f3f4f6; color: #374151; border: 1px solid #d1d5db;">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
